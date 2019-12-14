@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 const appRoutes = require('./routes/app');
 const usuarioRoutes = require('./routes/usuario');
 const loginRoutes = require('./routes/login');
+const hospitalRoutes = require('./routes/hospital');
 
 
 // Conexion a la base de datos con ODM mongoose
@@ -41,6 +42,7 @@ mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB',
 
 //Rutas
 app.use('/usuario', usuarioRoutes);
+app.use('/hospital', hospitalRoutes);
 app.use('/login', loginRoutes);
 app.use('/', appRoutes);
 
