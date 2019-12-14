@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 //paquete para generar json-web-tokens
 const jwt = require('jsonwebtoken');
 
+//Semilla de token
 const SEED = require('../config/config').SEED;
 
 // Inicializar variables
@@ -52,9 +53,9 @@ app.post("/", (req, res) => {
 
     res.status(200).json({
       ok: true,
-     usuario: usuarioDB,
-     token: token,
-     id: usuarioDB._id
+      usuario: usuarioDB,
+      token: token,
+      id: usuarioDB._id
     });
 
   });

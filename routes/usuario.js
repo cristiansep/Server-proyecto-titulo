@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mdAutenticacion = require('../middlewares/autenticacion');;
 
-// Inicializar variables
+
 const app = express();
 
 
@@ -36,7 +36,7 @@ app.get("/", (req, res, next) => {
 //------------------------//
 //     Crea usuarios      //
 //------------------------//
-app.post('/', mdAutenticacion.verificaToken ,(req,res)=> {
+app.post('/',(req,res)=> {
 
   let body = req.body;
 
@@ -60,7 +60,8 @@ app.post('/', mdAutenticacion.verificaToken ,(req,res)=> {
 
       res.status(201).json({
         ok: true,
-        usuario: usuarioGuardado
+        usuario: usuarioGuardado,
+        usuarioToken: req.usuario
       });
   });
 
@@ -69,7 +70,7 @@ app.post('/', mdAutenticacion.verificaToken ,(req,res)=> {
 //------------------------//
 //    Actualiza usuarios  //
 //------------------------//
-app.put('/:id',(req,res) => {
+app.put('/:id',mdAutenticacion.verificaToken ,(req,res) => {
 
   let id = req.params.id;
   let body = req.body;
@@ -126,7 +127,7 @@ app.put('/:id',(req,res) => {
 //------------------------//
 //    Elimina usuarios    //
 //------------------------//
-app.delete('/:id',(req,res) => {
+app.delete('/:id',mdAutenticacion.verificaToken ,(req,res) => {
 
   let id = req.params.id;
   let body = req.body;
