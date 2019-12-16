@@ -29,6 +29,8 @@ const loginRoutes = require('./routes/login');
 const hospitalRoutes = require('./routes/hospital');
 const medicoRoutes = require('./routes/medico');
 const busquedaRoutes = require('./routes/busqueda');
+const uploadRoutes = require('./routes/upload');
+const imagenesRoutes = require('./routes/imagenes');
 
 
 // Conexion a la base de datos con ODM mongoose
@@ -48,6 +50,8 @@ app.use('/hospital', hospitalRoutes);
 app.use('/medico', medicoRoutes);
 app.use('/login', loginRoutes);
 app.use('/busqueda', busquedaRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/img', imagenesRoutes);
 app.use('/', appRoutes);
 
 

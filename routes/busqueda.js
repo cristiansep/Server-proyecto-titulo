@@ -10,7 +10,7 @@ const app = express();
 
 
 //--------------------------//
-//  Busqueda pro colecion   //
+//  Busqueda por coleccion  //
 //-------------------------//
 app.get("/coleccion/:tabla/:busqueda", (req, res) => {
 
