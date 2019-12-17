@@ -1,6 +1,7 @@
-## Backend server para proyectos con mongodb
+## Backend server para proyectos con mongodb usando moongose
 
-Para instalar los modulos de node
+Para ejecutarlo es necesario instalar los modulos de node 
+usando el comando
 
 ```
 npm install
