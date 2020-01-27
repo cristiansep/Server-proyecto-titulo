@@ -15,6 +15,9 @@ const app = express();
 // Modelo usuario
 const Usuario = require('../models/usuario');
 
+// Autenticacion
+const mdAutenticacion = require('../middlewares/autenticacion');
+
 // Google
 const CLIENT_ID = require('../config/config').CLIENT_ID;
 const {OAuth2Client} = require('google-auth-library');
@@ -22,7 +25,7 @@ const client = new OAuth2Client(CLIENT_ID);
 
 
 //**************************//
-// Autenticacion de google  //
+//        Google            //
 //*************************//
 async function verify(token) {
   const ticket = await client.verifyIdToken({
@@ -45,7 +48,24 @@ async function verify(token) {
   }
 }
 
+//**************************//
+//       Renueva Token      //
+//*************************//
+app.get('/renuevatoken',mdAutenticacion.verificaToken,(req,res)=>{
 
+  let token = jwt.sign({usuario: req.usuario}, SEED ,{expiresIn: 14400}); //expira en 4 horas
+
+  res.status(200).json({
+    ok: true,
+    token
+  });
+
+});
+
+
+//**************************//
+// Autenticacion de google  //
+//*************************//
 app.post('/google', async(req,res)=>{
 
   let token = req.body.token;
@@ -81,7 +101,8 @@ app.post('/google', async(req,res)=>{
           ok: true,
           usuario: usuarioDB,
           token: token,
-          id: usuarioDB._id
+          id: usuarioDB._id,
+          menu: obtenerMenu(usuarioDB.role)
         });
       }
     }else{
@@ -111,7 +132,8 @@ app.post('/google', async(req,res)=>{
           ok: true,
           usuario: usuarioDB,
           token: token,
-          id: usuarioDB._id
+          id: usuarioDB._id,
+          menu: obtenerMenu(usuarioDB.role)
         });
 
       });
@@ -119,12 +141,6 @@ app.post('/google', async(req,res)=>{
     }
 
   });
-
-  // return res.status(200).json({
-  //   ok: true,
-  //   mensaje: "OK!!",
-  //   googleUser
-  // });
 
 });
 
@@ -171,13 +187,43 @@ app.post("/", (req, res) => {
       ok: true,
       usuario: usuarioDB,
       token: token,
-      id: usuarioDB._id
+      id: usuarioDB._id,
+      menu: obtenerMenu(usuarioDB.role)
     });
 
   });
 
 });
 
+function obtenerMenu(ROLE){
 
+ var menu = [
+    {
+      titulo: 'Inicio',
+      icono: 'mdi mdi-gauge',
+      submenu: [
+        { titulo: 'Home', url: '/home' },
+        { titulo: 'Informaciónes', url: '/progress' },
+        { titulo: 'Graficas', url: '/graficas' }
+      ]
+    },
+    {
+      titulo: 'Mantenimiento',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        // { titulo: 'Usuarios', url: '/usuarios' },
+        { titulo: 'Hospitales', url: '/hospitales' },
+        { titulo: 'Medicos', url: '/medicos' }
+      ]
+    }
+  ];
+
+  if(ROLE === 'ADMIN_ROLE'){
+    menu[1].submenu.unshift({ titulo: 'Usuarios', url: '/usuarios' });
+  }
+
+
+  return menu;
+}
 
 module.exports = app;

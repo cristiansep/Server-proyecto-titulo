@@ -16,31 +16,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS"); 
     next();
   });
-// app.use(cors());
 
-// app.get('/', function(req, res, next) {
-
-// res.json({ msg: 'This is CORS-enabled for all origins!' });
-
-// });
-
-// app.head('/', function(req, res, next) {
-
-// res.json({ msg: 'This is CORS-enabled for all origins!' });
-
-// });
-
-// app.post('/', function(req, res, next) {
-
-// res.json({ msg: 'This is CORS-enabled for all origins!' });
-
-// });
-
-// app.put('/', function(req, res, next) {
-
-// res.json({ msg: 'This is CORS-enabled for all origins!' });
-
-// });
 
 
 
