@@ -127,6 +127,7 @@ app.post('/',mdAutenticacion.verificaToken ,(req,res)=> {
 
   let medico = new Medico({
     nombre: body.nombre,
+    horario: body.horario,
     usuario: req.usuario._id,
     hospital: body.hospital
    
@@ -181,6 +182,7 @@ app.put('/:id',mdAutenticacion.verificaToken ,(req,res) => {
     }
 
     medico.nombre = body.nombre;
+    medico.horario = body.horario;
     medico.usuario = req.usuario._id;
     medico.hospital = body.hospital;
    

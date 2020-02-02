@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const medicoSchema = new Schema({
   nombre: { type: String, required: [true, "El	nombre	es	necesario"] },
-  horario: { type: String, required:false},
+  horario: { type: String, required:[true, "El	horario	es	necesario"]},
   img: { type: String, required: false },
   usuario: { type: Schema.Types.ObjectId, ref: "Usuario", required: true },
   hospital: {
