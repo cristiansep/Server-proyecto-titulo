@@ -203,23 +203,46 @@ function obtenerMenu(ROLE){
       icono: 'mdi mdi-gauge',
       submenu: [
         { titulo: 'Home', url: '/home' },
-        { titulo: 'Informaciónes', url: '/progress' },
-        { titulo: 'Graficas', url: '/graficas' }
-      ]
-    },
-    {
-      titulo: 'Mantenimiento',
-      icono: 'mdi mdi-folder-lock-open',
-      submenu: [
-        // { titulo: 'Usuarios', url: '/usuarios' },
-        { titulo: 'Hospitales', url: '/hospitales' },
-        { titulo: 'Medicos', url: '/medicos' }
+        { titulo: 'Medicos', url: '/progress' },
+        { titulo: 'Estadisticas', url: '/graficas' }
       ]
     }
+    // {
+    //   titulo: 'Mantenimiento',
+    //   icono: 'mdi mdi-folder-lock-open',
+    //   submenu: [
+    //     { titulo: 'Usuarios', url: '/usuarios' },
+    //     { titulo: 'Hospitales', url: '/hospitales' },
+    //     { titulo: 'Medicos', url: '/medicos' }
+    //   ]
+    // }
   ];
 
   if(ROLE === 'ADMIN_ROLE'){
-    menu[1].submenu.unshift({ titulo: 'Usuarios', url: '/usuarios' });
+    // menu[1].submenu.unshift({ titulo: 'Usuarios', url: '/usuarios' });
+    // menu[2].submenu.unshift({ titulo: 'Hospitales', url: '/hospitales' });
+    // menu[3].submenu.unshift({ titulo: 'Medicos', url: '/medicos' });
+    menu.push({
+      titulo: "Mantenimiento",
+      icono: "mdi mdi-folder-lock-open",
+      submenu: [
+        { titulo: 'Usuarios', url: '/usuarios' },
+        { titulo: 'Hospitales', url: '/hospitales' },
+        { titulo: 'Medicos', url: '/medicos' }
+      ]
+    });
+
+  }
+
+  if(ROLE === 'SECRETARY_ROLE'){
+    menu.push({
+      titulo: "Mantenimiento",
+      icono: "mdi mdi-folder-lock-open",
+      submenu: [
+        { titulo: 'Hospitales', url: '/hospitales' },
+        { titulo: 'Medicos', url: '/medicos' }
+      ]
+    });
   }
 
 
